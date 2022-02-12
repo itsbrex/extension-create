@@ -52,37 +52,32 @@ module.exports = function (dynamicHTML, outputPath) {
     apply: (compiler) => {
       const htmlEntries = removeEmptyEntries(dynamicHTML)
       for (const htmlEntry in htmlEntries) {
-        console.log({htmlEntry})
-        // const htmlEntryPath = htmlEntries[htmlEntry]
-        // const htmlPageOutput = path.resolve(outputPath, path.basename(htmlEntryPath))
+        const htmlEntryPath = htmlEntries[htmlEntry]
+        const htmlPageOutput = path.resolve(outputPath, path.basename(htmlEntryPath))
 
-        // // Ensure we remove all default scripts added by the user
-        // // from the output file. They are bundled now so we don't need it.
-        // // removeAllJavaScriptFromFile(htmlEntryPath, htmlPageOutput)
+        // Ensure we remove all default scripts added by the user
+        // from the output file. They are bundled now se we don't need it.
+        removeAllJavaScriptFromFile(htmlEntryPath, htmlPageOutput)
 
-        // // We want filenames to be in format [htmlPageName]/[htmlPageName]
-        // const filename = path.resolve(
-        //   path.dirname(htmlPageOutput),
-        //   path.basename(htmlPageOutput, '.html'),
-        //   path.basename(htmlPageOutput)
-        // )
+        // We want filenames to be in format [htmlPageName]/[htmlPageName]
+        const filename = path.resolve(
+          path.dirname(htmlPageOutput),
+          path.basename(htmlPageOutput, '.html'),
+          path.basename(htmlPageOutput)
+        )
 
-        // // Keep the HTML file as-is without the JavaScript files,
-        // // and add the bundled script instead.
-        // const template = path.resolve(htmlPageOutput, getTemplateHtmlFilename(htmlPageOutput))
+        // Keep the HTML file as-is without the JavaScript files,
+        // and add the bundled script instead.
+        const template = path.resolve(htmlPageOutput, getTemplateHtmlFilename(htmlPageOutput))
 
-        // console.log({htmlEntry})
-        // new HtmlWebpackPlugin({
-        //   // template,
-        //   // filename,
-        //   inject: 'head',
-        //   chunks: [htmlEntry],
-        //   // Public path is always at the root of each feature folder
-        //   // publicPath: path.relative(filename, filename.replace('.html', '.js')) //filename // (./, htmlEntry.replace('Page', ''))
-        // }).apply(compiler)
-
-        // All set, remove the template files we don't need.
-        // fs.unlink(template)
+        new HtmlWebpackPlugin({
+          template,
+          filename,
+          inject: 'head',
+          chunks: [htmlEntry],
+          // Public path is always at the root of each feature folder
+          publicPath: path.dirname(htmlEntry)
+        }).apply(compiler)
       }
     }
   }
