@@ -8,10 +8,10 @@
 const path = require('path')
 const TerserPlugin = require("terser-webpack-plugin");
 const extensionManifestAssets = require('extension-manifest-assets')
-// const manifestManagement = require('../shared-config/assetManagement/manifest')
-const jsManagement = require('../shared-config/assetManagement/javascript')
-// const cssManagement = require('../shared-config/assetManagement/css')
-const htmlManagement = require('../shared-config/assetManagement/html')
+// const manifestManagement = require('./manifestFields/manifest')
+const jsManagement = require('./manifestFields/javascript')
+// const cssManagement = require('./manifestFields/css')
+const htmlManagement = require('./manifestFields/html')
 // const cleanup = require('./cleanup')
 
 process.on('unhandledRejection', (error) => { throw error })
@@ -52,7 +52,14 @@ module.exports = async (projectDir, {browserVendor, manifestPath}) => {
         // cleanup(projectDir),
       ],
       resolve: {
-        extensions: ['.js', '.json']
+        extensions: [
+          '.mjs',
+          '.js',
+          // ...(useTypeScript ? ['.tsx', '.ts'] : []),
+          '.jsx',
+          '.json',
+          '.wasm',
+        ]
       }
     })
   }

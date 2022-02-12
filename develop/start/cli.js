@@ -26,7 +26,7 @@ async function startExtensionCLI(clientProgram = program) {
     .description('start the development server')
     .option(
       '-b, --browser <browser-vendor>',
-      'specify a browser to run your extension'
+      'specify a browser to run your extension in production mode'
     )
     .on('--help', () => messages.programHelp())
     .parse(process.argv)

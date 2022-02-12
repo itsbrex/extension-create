@@ -15,10 +15,7 @@
   "bin": "./module.js",
   "author": "Cezar Augusto <boss@cezaraugusto.net> (https://twitter.com/cezaraugusto)",
   "scripts": {
-    "start": "node ./start/module.js",
-    "dev": "echo 'dev step not implemented'",
-    "build": "echo 'build step not implemented'",
-    "test": "jest"
+    "develop": "node ./start/module.js"
   },
   "dependencies": {
     "commander": "^9.0.0",

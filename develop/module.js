@@ -10,9 +10,12 @@
 const {program} = require('commander')
 
 const startCLI = require('./start/cli')
-const buildCLI = require('./build/cli')
+// const devCLI = require('./dev/cli')
+// const buildCLI = require('./build/cli')
+// TODO: export, lint
 
 module.exports = function develop(clientProgram = program) {
   startCLI(clientProgram)
-  buildCLI(clientProgram)
+  // devCLI(clientProgram)
+  // buildCLI(clientProgram)
 }

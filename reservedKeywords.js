@@ -5,6 +5,7 @@ const reservedKeywords = [
   'start',
   'test',
   'open',
+  'eject',
   'deploy',
   'dev',
   'lint',

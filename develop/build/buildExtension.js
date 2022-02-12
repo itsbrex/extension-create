@@ -9,7 +9,7 @@ const {log} = require('log-md')
 const {
   setWorkingDirFromLocal,
   setWorkingDirFromRemote
-} = require('../shared-config/workingDirectory')
+} = require('../shared-config/steps/setWorkingDirectory')
 
 const resoleManifest = require('../shared-config/resolve/resolveManifest')
 const startWebpack = require('./steps/startWebpackServer')

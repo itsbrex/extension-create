@@ -1,9 +1,9 @@
-// ███████╗████████╗ █████╗ ██████╗ ████████╗
-// ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝
-// ███████╗   ██║   ███████║██████╔╝   ██║
-// ╚════██║   ██║   ██╔══██║██╔══██╗   ██║
-// ███████║   ██║   ██║  ██║██║  ██║   ██║
-// ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝
+// ██████╗ ███████╗██╗   ██╗
+// ██╔══██╗██╔════╝██║   ██║
+// ██║  ██║█████╗  ██║   ██║
+// ██║  ██║██╔══╝  ╚██╗ ██╔╝
+// ██████╔╝███████╗ ╚████╔╝
+// ╚═════╝ ╚══════╝  ╚═══╝
 
 const {log} = require('log-md')
 
@@ -11,7 +11,7 @@ const {
   setWorkingDirFromLocal,
   setWorkingDirFromRemote
 } = require('../shared-config/steps/setWorkingDirectory')
-const resoleManifest = require('../shared-config/steps/resolveManifest')
+const resoleManifest = require('../shared-config/resolve/resolveManifest')
 const startWebpack = require('./steps/startWebpackDevServer')
 
 module.exports = async function startExtension(
