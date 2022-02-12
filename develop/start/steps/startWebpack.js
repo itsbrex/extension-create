@@ -17,11 +17,11 @@ function closeAll(devServer) {
   process.exit()
 }
 
-module.exports = function startWebpack(
+module.exports = async function startWebpack(
   projectDir,
   {manifestPath, browserVendor}
 ) {
-  const webpackConfig = compilerConfig(projectDir, {
+  const webpackConfig = await compilerConfig(projectDir, {
     manifestPath,
     browserVendor
   })

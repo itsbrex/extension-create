@@ -6,6 +6,9 @@
 // ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝
 
 module.exports = {
+    devMiddleware: {
+      writeToDisk: true
+    }
   // clientLogLevel: 'none',
   // compress: true,
   // overlay: true,
