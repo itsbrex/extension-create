@@ -6,11 +6,8 @@
 // ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝
 
 const webpack = require('webpack')
-const {log} = require('log-md')
-const WebpackDevServer = require('webpack-dev-server')
 
 const compilerConfig = require('../config/compiler')
-const serverConfig = require('../config/server')
 
 function closeAll(devServer) {
   devServer.close()
@@ -26,11 +23,12 @@ module.exports = async function startWebpack(
     browserVendor
   })
 
-  const compiler = webpack(webpackConfig)
-  const devServer = new WebpackDevServer(serverConfig, compiler)
-
-  devServer.startCallback((error) => {
-    if (error) return log(`Error in the extension runner: ${error}`)
+  webpack(webpackConfig, (err, stats) => {
+    if (err || stats.hasErrors()) {
+      console.log(stats.hasErrors())
+    }
+    // console.table(stats.compilation.missingDependencies._set)
+    console.table(stats.compilation.assetsInfo)
   })
 
   process.on('SIGINT', () => closeAll(devServer))

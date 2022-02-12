@@ -6,7 +6,7 @@ const semver = require('semver')
 const isKeyword = require('./reservedKeywords')
 const packageJson = require('./package.json')
 const createExtensionCLI = require('./create')
-const developExtensionCLI = require('./develop')
+const developExtensionCLI = require('./develop/module')
 const messages = require('./messages')
 
 process.on('unhandledRejection', (error) => {
@@ -37,7 +37,6 @@ if (!isKeyword()) {
     messages.noURLWithoutStart(argument)
     process.exit()
   }
-  console.log('good')
 
   createExtensionCLI(extensionCreate)
 } else {

@@ -7,26 +7,26 @@
 
 const {program} = require('commander')
 
-const startExtension = require('./startExtension')
+const buildExtension = require('./buildExtension')
 const messages = require('./messages/programHelp')
 const packageJson = require('../package.json')
 
 let browserVendor
 
-async function startExtensionCLI(clientProgram = program) {
+async function buildExtensionCLI(clientProgram = program) {
   clientProgram
     .version(packageJson.version)
-    .command('start')
-    .usage('start [path-to-extension-folder] [options]')
+    .command('build')
+    .usage('build [path-to-extension-folder] [options]')
     .action((cmd) => {
       const {browser} = cmd
 
       browserVendor = browser
     })
-    .description('start the development server')
+    .description('build the extension (prepare for deploy)')
     .option(
       '-b, --browser <browser-vendor>',
-      'specify a browser to run your extension'
+      'specify which browser to target your extension build'
     )
     .on('--help', () => messages.programHelp())
     .parse(process.argv)
@@ -35,13 +35,13 @@ async function startExtensionCLI(clientProgram = program) {
   const commands = clientProgram.commands[0]
   const customPath = commands.args[1] || ''
 
-  await startExtension(projectDir, {customPath, browserVendor})
+  await buildExtension(projectDir, {customPath, browserVendor})
 }
 
 // If the module was called from the cmd line, execute it
 if (require.main === module) {
-  startExtensionCLI()
+  buildExtensionCLI()
 }
 
 // Export as a module so it can be reused
-module.exports = startExtensionCLI
+module.exports = buildExtensionCLI

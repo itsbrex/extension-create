@@ -11,11 +11,11 @@ module.exports = function programHelp() {
   log(`
     # Help center for the \`start\` command
 
-    ## The \`--remote\` _<github-url>_ flag
+    ## The \`remote\` _<github-url>_ argument
 
     If you want to get up and running with an existing extension
     available remotely on GitHub, you can specify its path as an
-    argument to the \`--remote\` flag.
+    argument to the \`start\` command.
 
     The path can be any GitHub URL subdirectory. If a GitHub URL is provided,
     the directory is downloaded to the current working directory.

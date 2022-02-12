@@ -1,20 +1,20 @@
-// ███████╗████████╗ █████╗ ██████╗ ████████╗
-// ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝
-// ███████╗   ██║   ███████║██████╔╝   ██║
-// ╚════██║   ██║   ██╔══██║██╔══██╗   ██║
-// ███████║   ██║   ██║  ██║██║  ██║   ██║
-// ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝
+// ██████╗ ██╗   ██╗██╗██╗     ██████╗
+// ██╔══██╗██║   ██║██║██║     ██╔══██╗
+// ██████╔╝██║   ██║██║██║     ██║  ██║
+// ██╔══██╗██║   ██║██║██║     ██║  ██║
+// ██████╔╝╚██████╔╝██║███████╗██████╔╝
+// ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝
 
 const {log} = require('log-md')
-
 const {
   setWorkingDirFromLocal,
   setWorkingDirFromRemote
 } = require('../shared-config/workingDirectory')
-const resoleManifest = require('../shared-config/resolve/resolveManifest')
-const startWebpack = require('./steps/startWebpackDevServer')
 
-module.exports = async function startExtension(
+const resoleManifest = require('../shared-config/resolve/resolveManifest')
+const startWebpack = require('./steps/startWebpackServer')
+
+module.exports = async function buildExtension(
   workingDir,
   {customPath, browserVendor}
 ) {
@@ -38,7 +38,7 @@ module.exports = async function startExtension(
     })
   } catch (error) {
     log(`
-      Error while starting the extension: ${error}
+      Error while building the extension: ${error}
     `)
     process.exit(1)
   }

@@ -6,6 +6,6 @@ module.exports = async function (projectDir, { browserVendor, manifestPath }) {
 
   return merge(defaultConfig, {
     devtool: 'inline-source-map',
-    mode: 'development'
+    mode: 'production'
   })
 };
