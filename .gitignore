@@ -7,6 +7,7 @@ local_samples
 docs
 dist
 yarn.lock
-FUTURE
-SAMPLES
-DEPS
+_FUTURE
+_SAMPLES
+_DEPS
+0_*

@@ -9,6 +9,7 @@
   "scripts": {
     "extension-create": "cross-env NODE_ENV=development node --trace-warnings cli.js",
     "lint": "prettier --check --write create develop && eslint --config=eslintrc.json create develop",
+    "lint:specific": "prettier --check --write $DEST && eslint --config=eslintrc.json $DEST",
     "preinstall": "sh preinstall.sh",
     "test": "jest"
   },

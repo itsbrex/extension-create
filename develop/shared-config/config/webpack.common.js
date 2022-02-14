@@ -6,27 +6,29 @@
 // ╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝
 
 const path = require('path')
-const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin')
 const extensionManifestAssets = require('extension-manifest-assets')
-// const manifestManagement = require('./manifestFields/manifest')
-const jsManagement = require('./manifestFields/javascript')
-// const cssManagement = require('./manifestFields/css')
-const htmlManagement = require('./manifestFields/html')
-// const cleanup = require('./cleanup')
+// const manifestManagement = require('./loadManifest')
+const jsManagement = require('./javascript')
+// const cssManagement = require('./css')
+const htmlManagement = require('./html')
 
-process.on('unhandledRejection', (error) => { throw error })
+process.on('unhandledRejection', (error) => {
+  throw error
+})
 
-const distFolderName = (manifestPath) => `${path.dirname(manifestPath)}/dev-package`
+const distFolderName = (manifestPath) =>
+  `${path.dirname(manifestPath)}/_package`
 
-module.exports = async (projectDir, {browserVendor, manifestPath}) => {
+module.exports = (projectDir, {/* browserVendor, */ manifestPath}) => {
   // Output path points to a top level folder within the extension bundle
   const outputPath = path.resolve(projectDir, distFolderName(manifestPath))
-// console.log({outputPath})
-  const config = ({dynamicJs, dynamicHtml, dynamicCss}) => {
-    return ({
+
+  const config = ({dynamicJs, dynamicHtml /* dynamicCss, features */}) => {
+    return {
       optimization: {
         minimize: true,
-        minimizer: [new TerserPlugin()],
+        minimizer: [new TerserPlugin()]
       },
       entry: jsManagement(dynamicJs),
       output: {
@@ -35,41 +37,30 @@ module.exports = async (projectDir, {browserVendor, manifestPath}) => {
         clean: true,
         publicPath: '/'
       },
-      plugins: [
-        // Supports generating HTML files at runtime.
-        // This allow us access to HTML files w/ the polyfill
-        // included without messing with the user space
-        // manifestManagement(manifestPath, outputPath),
-        htmlManagement(dynamicHtml, outputPath),
-        // cssManagement(dynamicCss, outputPath),
-        // imageManagement({projectDir, manifestPath, outputPath}),????
-        // localeManagement({projectDir, manifestPath, outputPath}),????
-        // assetsManagement({projectDir, manifestPath, outputPath}),???? fonts/images/etc
-        // Supports Add-On polyfilling where appropriate
-        // injectPolyfill(outputPath, browserVendor),
-        // Browser lists loaded conditionally based on user choice
-        // browserSwitch(projectDir, browserVendor),
-        // cleanup(projectDir),
-      ],
+      plugins: [htmlManagement(dynamicHtml, outputPath)],
+      // TODO: Support TypeScript/React
+      // TODO: Support Babel
       resolve: {
         extensions: [
           '.mjs',
           '.js',
           // ...(useTypeScript ? ['.tsx', '.ts'] : []),
-          '.jsx',
+          // '.jsx',
           '.json',
-          '.wasm',
+          '.wasm'
         ]
       }
-    })
+    }
   }
 
-  return extensionManifestAssets(manifestPath)
-  .then(({js, html, css}) => {
-    return config({
-      dynamicJs: js,
-      dynamicHtml: html,
-      dynamicCss: css
-    })
-  })
+  return extensionManifestAssets(manifestPath).then(
+    ({js, html, css, features}) => {
+      return config({
+        dynamicJs: js,
+        dynamicHtml: html,
+        dynamicCss: css,
+        features
+      })
+    }
+  )
 }

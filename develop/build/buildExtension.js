@@ -11,8 +11,8 @@ const {
   setWorkingDirFromRemote
 } = require('../shared-config/steps/setWorkingDirectory')
 
-const resoleManifest = require('../shared-config/resolve/resolveManifest')
-const startWebpack = require('./steps/startWebpackServer')
+const resoleManifest = require('../shared-config/steps/resolveManifest')
+const startWebpack = require('./steps/startWebpack')
 
 module.exports = async function buildExtension(
   workingDir,

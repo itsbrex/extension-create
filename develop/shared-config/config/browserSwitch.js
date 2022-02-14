@@ -6,9 +6,9 @@ module.exports = function browserSwitch(projectDir, browserVendor) {
     return new RunChromeExtension({extensionPath: projectDir})
   }
 
-  if (browserVendor === 'chrome') {
-    return new RunEdgeExtension({extensionPath: projectDir})
-  }
+  // if (browserVendor === 'chrome') {
+  //   return new RunEdgeExtension({extensionPath: projectDir})
+  // }
 
   if (browserVendor === 'all') {
     return {

@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs-extra')
+const {log} = require('log-md')
 const goGitIt = require('go-git-it')
 
 function setWorkingDirFromRemote(workingDir, customPath) {
